@@ -2,7 +2,7 @@
 include("inc/dbconnect.php");
 
 $insert = $conn->prepare(
-    "INSERT into `events`
+    "UPDATE `events`
     SET
     `name` = :eventname,
     `email` = :email,
@@ -11,11 +11,12 @@ $insert = $conn->prepare(
     `beschreibung`= :beschreibung,
     `ideen`= :ideen,
     `optionen_veg` = :optionen_veg,
-    `optionen_geschmack` = :optionen_geschmack;
-    SELECT LAST_INSERT_ID();
+    `optionen_geschmack` = :optionen_geschmack
+    WHERE `ID` = :eventid
     "
 );
 
+$insert->bindValue(':eventid', $_POST['eventid']);
 $insert->bindValue(':eventname', $_POST['eventname']);
 $insert->bindValue(':email', $_POST['email']);
 
@@ -31,7 +32,8 @@ $insert->bindValue(':ideen', $_POST['ideen']);
 
 $optionVeg = 0;
 try {
-    if (boolval($_POST['optionen_veg'])) {
+    echo $_POST['optionen_geschmack'];
+    if ($_POST['optionen_veg'] == "on") {
         $optionVeg = 1;
     };
 } catch (Exception $e) {
@@ -40,7 +42,7 @@ $insert->bindValue(':optionen_veg', $optionVeg);
 
 $optionGeschmack = 0;
 try {
-    if (boolval($_POST['optionen_geschmack'])) {
+    if ($_POST['optionen_geschmack'] == "on") {
         $optionGeschmack = 1;
     };
 } catch (Exception $e) {
@@ -48,8 +50,7 @@ try {
 $insert->bindValue(':optionen_geschmack', $optionGeschmack);
 
 $insert->execute();
-$lastInsertId = $conn->lastInsertId();
 
 // redirect to eventadmin
-header("Location: ./eventadmin.php?id=" . $lastInsertId . "&token=1234");
+header("Location: ./eventadmin.php?id=" . $_POST['eventid'] . "&token=1234");
 die();
