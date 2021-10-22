@@ -7,6 +7,7 @@ $eventId =  $_GET['id'];
 
 $sqlEvent = "SELECT * FROM events WHERE ID = " . $conn->quote($eventId);
 $event = $conn->query($sqlEvent)->fetch();
+$eventTime = strtotime($event['zeit']);
 
 $sqlMitbringsel = "SELECT * FROM mitbringsel WHERE eventId = " . $eventId;
 $mitbringsel = $conn->query($sqlMitbringsel)->fetchAll();
@@ -80,8 +81,8 @@ $optionen_geschmack_colors = array(
             </p>
         </div>
         <div class="container text-secondary">
-            <span><i class="bi bi-geo-fill"></i> <?php echo $event['ort'] ?></span>
-            <span><i class="bi bi-clock"></i> <?php echo $event['datum'] ?> Uhr </span>
+            <span><i class="bi bi-geo-fill"></i> <?php echo date("D, d.m.Y", $eventTime) ?></span>
+            <span><i class="bi bi-clock"></i> <?php echo date("H:i", $eventTime) ?> Uhr </span>
         </div>
     </header>
     <div class="container py-4">
@@ -96,6 +97,7 @@ $optionen_geschmack_colors = array(
                 $keine_angabe = ($option_veg + $option_geschmack) == 0 && $row['wieviel'] == "";
                 ?>
                 <li class="
+                py-2
             list-group-item
             d-flex justify-content-between align-items-start
           ">

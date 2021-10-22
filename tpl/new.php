@@ -17,7 +17,7 @@ function createMitbringselFields($eventId, $row)
         <input type="hidden" name="rowid" value="<?php echo $row['id'] ?>" ?>
     <?php } ?>
     <div class="mb-3">
-        <label for="Name" class="form-label">Name</label>
+        <label for="Name" class="form-label">Mein Name</label>
         <input type="text" required name="wer" class="form-control" id="Name" value="<?php echo $row['wer'] ?>">
     </div>
     <div class="mb-3">
