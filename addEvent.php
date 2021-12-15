@@ -52,7 +52,7 @@ $insert->execute();
 $lastInsertId = $conn->lastInsertId();
 
 // send mail with links
-
+$BASE_URL = getenv("BASE_URL");
 $eventlink = $BASE_URL . "event.php?id=" . $lastInsertId;
 $eventadminlink = $BASE_URL . "eventadmin.php?id=" . $lastInsertId;
 
