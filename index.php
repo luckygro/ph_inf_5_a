@@ -56,11 +56,11 @@
             <fieldset class="mb-3">
                 <span class="strong">Details abfragen</span>
                 <div class="my-2 form-check form-switch">
-                    <input class="form-check-input" name="optionen_veg" type="checkbox" role="switch" id="vegtVegan" />
+                    <input class="form-check-input" checked name="optionen_veg" type="checkbox" role="switch" id="vegtVegan" />
                     <label class="form-check-label" for="vegtVegan">vegetarisch / vegan</label>
                 </div>
                 <div class="mt-2 form-check form-switch">
-                    <input class="form-check-input" name="optionen_geschmack" type="checkbox" role="switch" id="suessDeftig" />
+                    <input class="form-check-input" checked name="optionen_geschmack" type="checkbox" role="switch" id="suessDeftig" />
                     <label class="form-check-label" for="suessDeftig">süß / deftig</label>
                 </div>
             </fieldset>

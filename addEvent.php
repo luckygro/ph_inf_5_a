@@ -1,5 +1,6 @@
 <?php
 include("inc/dbconnect.php");
+include("env.php");
 
 $insert = $conn->prepare(
     "INSERT into `events`
@@ -49,6 +50,20 @@ $insert->bindValue(':optionen_geschmack', $optionGeschmack);
 
 $insert->execute();
 $lastInsertId = $conn->lastInsertId();
+
+// send mail with links
+
+$eventlink = $BASE_URL . "event.php?id=" . $lastInsertId;
+$eventadminlink = $BASE_URL . "eventadmin.php?id=" . $lastInsertId;
+
+// Mailserver muss aufgesetzt sein (z.B. sendmail)
+$empfaenger = $_POST['email'];
+$betreff = "Bringmit-App: Links";
+$from = "From: Bringmit-App <no-reply@bringmitapp.de>";
+$text = "Danke, dass du die Bringmit-App nutzt!
+Link zum Weitergeben: " . $eventlink . "
+Link zur Admin-Oberfläche: " . $eventadminlink;
+mail($empfaenger, $betreff, $text, $from);
 
 // redirect to eventadmin
 header("Location: ./eventadmin.php?id=" . $lastInsertId . "&token=1234");

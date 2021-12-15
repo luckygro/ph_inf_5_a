@@ -1,4 +1,5 @@
 <?php
+include("env.php");
 include("inc/dbconnect.php");
 include("tpl/new.php");
 
@@ -35,6 +36,9 @@ $optionen_geschmack_colors = array(
     1 => "bg-info text-dark",
     2 => "bg-warning text-dark",
 );
+
+$eventlink = $BASE_URL . "event.php?id=" . $eventId;
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +98,8 @@ $optionen_geschmack_colors = array(
 
     <div class="py-5 container">
         <h3 class="d-block py-3">Cool, dass Du unsere App nutzt!</h3>
-        <p>Du kannst dein Event hier ändern...</p>
+        <p>Diesen Link kannst Du an die Teilnehmer weitergeben: <a target="_blank" href="<?php echo $eventlink ?>"><?php echo $eventlink ?></a></p>
+        <p>Hier kannst Du Dein Event ändern:</p>
         <ul class="list-group">
             <li class="list-group-item bg-light">
                 <form action="updateEvent.php" method="POST">
@@ -142,9 +147,9 @@ $optionen_geschmack_colors = array(
                     </fieldset>
                     <div class="mb-3">
                         <label for="emailAdresse" class="form-label">Emailadresse</label>
-                        <input type="email" value="<?php echo $event['email'] ?>" name="email" class="form-control" id="emailAdresse" aria-describedby="emailHelp" />
+                        <input type="email" readonly value="<?php echo $event['email'] ?>" name="email" class="form-control" id="emailAdresse" aria-describedby="emailHelp" />
                         <div id="emailHelp" class="form-text">
-                            Wir senden dir den Link zur Planungsseite per E-Mail.
+                            Wir haben Dir einen Link zu dieser Seite per E-Mail gesendet.
                         </div>
                     </div>
 
